@@ -1,0 +1,12 @@
+---
+ - name: Adding or Deleting User Accounts
+   hosts: workers
+   vars_files:
+           - /home/ansiuser/myvars.yaml
+   tasks:
+      - name: Make Sure {{username}} is {{state1}}
+        user:
+            name: "{{username}}"
+            state: "{{state1}}"
+        become: yes
+
