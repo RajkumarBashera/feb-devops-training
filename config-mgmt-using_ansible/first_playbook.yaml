@@ -1,0 +1,10 @@
+---
+ - hosts: workers
+   become: yes
+   tasks:
+      - group: name=projectX state=present
+
+      - user: name=samual state=present groups=projectX 
+
+      - file: name=/myproject state=directory owner=samual group=projectX mode=0770
+

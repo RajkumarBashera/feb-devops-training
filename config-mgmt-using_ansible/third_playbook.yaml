@@ -1,0 +1,25 @@
+---
+ - name: Play one for webserver group
+   hosts: webserver
+   become: no
+   tasks:
+      - name: Task one of first play
+        file: 
+            name: /tmp/zzz.txt
+            state: touch
+
+      - name: Task two of first play
+        file: 
+            name: /tmp/data1234
+            state: directory
+
+
+ - name: Play 2 for dbserver group
+   hosts: dbserver
+   become: yes
+   tasks: 
+      - name: Task one of play 2 
+        user:
+            name: userXYZ
+            state: present
+

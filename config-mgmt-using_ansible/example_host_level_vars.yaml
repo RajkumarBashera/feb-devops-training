@@ -1,0 +1,8 @@
+---
+ - hosts: workers
+   vars: 
+        var2: "Welcome to"
+   tasks:
+      - debug:
+              msg: "Hello all {{var2}} {{var1}}'s Training"
+

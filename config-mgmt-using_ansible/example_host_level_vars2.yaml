@@ -1,0 +1,15 @@
+---
+ - hosts: workers
+   become: yes
+   tasks:
+           - name: Lets install relevant packages
+             apt: 
+                 name: "{{mypackage}}"
+                 state: present
+                 update_cache: yes
+
+           - name: Lets start respective services
+             service:
+                 name: "{{myservice}}"
+                 state: started
+

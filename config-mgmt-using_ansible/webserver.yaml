@@ -1,0 +1,20 @@
+---
+ - name: Install and configure Apache Webserver
+   hosts: webserver
+   become: yes
+   tasks:
+      - name: Install Apache2 Package
+        apt: 
+            name: apache2
+            state: present
+
+      - name: Start the service apache2
+        service:
+            name: apache2
+            state: started
+            enabled: yes
+
+      - name: Deploy webpages to Document root
+        copy: 
+            dest: /var/www/html/index.html
+            src: /home/ansiuser/webpage.html 

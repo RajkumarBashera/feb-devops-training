@@ -1,0 +1,29 @@
+[webserver]
+worker1
+
+
+[dbserver]
+worker2
+
+[workers]
+worker1 mypackage=apache2 myservice=apache2 var1=SimpliLearn
+worker2 mypackage=mysql-server myservice=mysql var1=DevOps
+
+
+[myinfra]
+localhost
+worker1
+worker2
+
+#[group1]
+#10.100.34.23
+#192.168.100.[100:105]                     # this will give 6 Ip addresses 
+#[10:14].20.20.20
+
+#[groupX]
+#worker[A:F].pavan.com
+
+#[NASA:children]
+#group1
+#groupX
+

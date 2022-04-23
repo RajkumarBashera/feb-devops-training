@@ -1,0 +1,24 @@
+---
+ - name: My second playbook on Simplilearn lab
+   hosts: workers
+   become: yes
+   tasks:
+      - name: Creating group ProjectDevOps 
+        group: 
+            name: ProjectDevOps
+            state: present
+
+      - name: Adding user rajk to the group ProjectDevOps
+        user: 
+            name: rajk
+            state: present 
+            groups: ProjectDevOps
+
+      - name: Lets create project directory with rajk owner
+        file: 
+            name: /myproject 
+            state: directory 
+            owner: rajk
+            group: ProjectDevOps
+            mode: 0770
+

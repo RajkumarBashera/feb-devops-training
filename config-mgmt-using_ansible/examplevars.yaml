@@ -1,0 +1,14 @@
+---
+ - name: Play Level vars demo on User management
+   hosts: myinfra
+   vars:
+      - myuser: developer02
+      - mystate: present
+      - mycomment: "Java developer"
+   tasks:
+      - name: "Making sure {{myuser}} is {{mystate}}"
+        become: yes
+        user:
+            name: "{{myuser}}"
+            state: "{{mystate}}"
+            comment: "{{mycomment}}"

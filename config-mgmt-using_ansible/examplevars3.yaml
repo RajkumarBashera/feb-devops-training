@@ -1,0 +1,17 @@
+---
+ - name: Play1
+   hosts: webserver
+   vars:
+           myvar1: Simplilearn
+   tasks: 
+      - debug:
+              msg: "Welcome to {{myvar1}}"
+
+ - name: Play2
+   hosts: dbserver
+   vars: 
+            myvar1: CMT-Ansible
+   tasks: 
+      - debug:
+              msg: "Welcome to {{myvar1}}"
+
