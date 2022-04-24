@@ -1,0 +1,25 @@
+---
+- hosts: webserver
+  tasks:
+       - name: Task1
+         debug:
+               msg: "Perform Task 1"
+         tags:
+              - blue
+
+       - name: Task2
+         debug:
+               msg: "Perform Task 2"
+         tags:
+              - red
+
+       - name: Task3
+         debug:
+               msg: "Perform Task 3"
+
+       - name: Task4
+         debug:
+               msg: "Perform Task 4"
+         tags:
+              - blue
+              - red

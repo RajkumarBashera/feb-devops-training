@@ -1,0 +1,13 @@
+---
+ - hosts: webserver
+   become: yes
+   tasks:
+       - name: Restarting required services
+         service:
+              name: "{{item}}"
+              state: restarted
+         loop:
+              - sshd
+              - apache2
+              - cron
+

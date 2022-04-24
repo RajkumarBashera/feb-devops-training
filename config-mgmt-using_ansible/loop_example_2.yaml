@@ -1,0 +1,13 @@
+---
+ - hosts: webserver
+   become: yes
+   tasks:
+       - name: Performing required operation on services
+         service:
+              name: "{{item.myservice}}"
+              state: "{{item.mystate}}"
+         loop:
+              - {"myservice":"sshd","mystate":"restarted"}
+              - {"myservice":"apache2","mystate":"stopped"}
+              - {"myservice":"cron","mystate":"started"}
+

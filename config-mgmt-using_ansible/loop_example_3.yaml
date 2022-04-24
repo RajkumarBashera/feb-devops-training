@@ -1,0 +1,23 @@
+---
+ - hosts: workers
+   become: yes
+   tasks:
+       - name: Adding UserGroups
+         group:
+               name: "{{ item }}"
+               state: present
+         loop:
+             - developers
+             - frontend
+             - backend
+
+       - name: Adding user accounts 
+         user:
+               name: "{{ item.uname }}"
+               uid: "{{ item.uid }}"
+               groups: "{{ item.ugroup }}"
+         loop:
+             - {"uname":"developerX", "uid":"2020", "ugroup":"developers"}
+             - {"uname":"developerY", "uid":"3030", "ugroup":"frontend"}
+             - {"uname":"developerZ", "uid":"4040", "ugroup":"backend"}
+
