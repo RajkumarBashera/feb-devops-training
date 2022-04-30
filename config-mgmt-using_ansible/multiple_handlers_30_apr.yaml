@@ -1,0 +1,27 @@
+---
+ - name: Setting up webserver using Apache
+   hosts: webserver
+   become: yes
+   tasks:
+
+       - name: Place Webpage to document root
+         copy:
+             src: /home/ansiuser/webpage.html
+             dest: /var/www/html/index.html
+         notify:
+             - handler1
+             - handler2
+
+       - name: task2
+         debug:
+             msg: "this is task2"
+
+   handlers:          
+       - name: handler1
+         debug:
+             msg: "this is handler1 running because webpage change happened"
+
+       - name: handler2
+         debug:
+             msg: "this is handler2"
+

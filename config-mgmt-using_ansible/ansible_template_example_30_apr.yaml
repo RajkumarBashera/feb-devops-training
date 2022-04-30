@@ -1,0 +1,13 @@
+---
+ - hosts:
+      - webserver
+      - dbserver
+   become: yes
+   vars:
+      - myadmin: Raj Kumar
+      - myemail: rkb1128@gmail.com
+   tasks:
+      - name: Setting up Message of the day
+        template: 
+             src: /home/ansiuser/template_example_30_apr.j2
+             dest: /etc/motd
