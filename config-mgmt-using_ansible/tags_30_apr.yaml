@@ -1,0 +1,43 @@
+---
+ - name: Setting up webserver using Apache
+   hosts: webserver
+   become: yes
+   tasks:
+       - name: Installing Apache Package on Debian Family node
+         apt: 
+            name: apache2
+            state: present
+            update_cache: yes
+         when: ansible_os_family=="Debian" or ansible_memtotal_mb >=5000
+         tags: installation
+
+       - name: Installing Apache Package Httpd on RedHat family node
+         yum:
+            name: httpd
+            state: present
+         when: ansible_os_family=="RedHat"
+         tags: installation
+
+       - name: Start Apache2 service on Debian Family node
+         service:
+             name: apache2
+             state: restarted
+             enabled: yes
+         when: ansible_os_family=="Debian"
+         tags: service_restart
+
+
+       - name: Start Apache2 service on RedHat Family node
+         service:
+             name: httpd
+             state: started
+             enabled: yes
+         when: ansible_os_family=="RedHat"
+         tags: service_restart
+
+       - name: Place Webpage to document root
+         copy:
+             src: /home/ansiuser/webpage.html
+             dest: /var/www/html/index.html
+         tags: deploy_webpage
+

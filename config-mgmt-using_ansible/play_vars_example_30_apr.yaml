@@ -1,0 +1,12 @@
+---
+ - name: My play  1 for adding or deleting user account
+   hosts: workers
+   vars_files:
+       - /home/ansiuser/play_vars_vault.yaml                  ## its a vault
+   become: yes
+   tasks:
+     - name: Make sure {{myuser}} is {{mystate}}
+       user:
+          name: "{{myuser}}"
+          state: "{{mystate}}"
+

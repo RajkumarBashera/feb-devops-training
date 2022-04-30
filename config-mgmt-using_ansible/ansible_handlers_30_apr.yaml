@@ -1,0 +1,24 @@
+---
+ - name: Setting up webserver using Apache
+   hosts: webserver
+   become: yes
+   tasks:
+       - name: Installing Apache Package on Debian Family node
+         apt: 
+            name: apache2
+            state: present
+            update_cache: yes
+         notify: Restart_Apache2
+
+       - name: Place Webpage to document root
+         copy:
+             src: /home/ansiuser/webpage.html
+             dest: /var/www/html/index.html
+
+   handlers:          
+       - name: Restart_Apache2
+         service:
+             name: apache2
+             state: restarted
+             enabled: yes
+
