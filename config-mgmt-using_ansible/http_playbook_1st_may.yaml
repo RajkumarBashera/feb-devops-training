@@ -1,0 +1,40 @@
+---
+ - hosts:
+         - webserver
+         - dbserver
+   become: yes
+   vars:
+           #- http_port: 8081
+           - document_root: /var/www/html
+   tasks: 
+     - name: Install Apache Webserver
+       apt:
+          name: apache2
+          state: present
+          update_cache: yes
+       notify: "Restart Apache2 service"   
+
+     - name: Change Apache Listen port number to {{http_port}}
+       template: 
+          src: httpPort.j2
+          dest: /etc/apache2/ports.conf
+       notify: "Restart Apache2 service"
+
+     - name: Update Apache Port to {{http_port}} in configuration file
+       template: 
+          src: httpConf.j2
+          dest: /etc/apache2/sites-enabled/000-default.conf
+       notify: "Restart Apache2 service"   
+
+     - name: Deploy Webpage
+       copy:
+          src: webpage1.html
+          dest: "{{document_root}}/index.html"
+
+   handlers:
+     - name: "Restart Apache2 service"
+       service:
+          name: apache2
+          state: restarted
+          enabled: true
+
