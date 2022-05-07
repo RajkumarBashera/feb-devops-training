@@ -1,0 +1,23 @@
+---
+ - hosts: webserver
+   become: yes
+   tasks: 
+      - name: Ensure the default Apache port is 8080
+        ansible.builtin.lineinfile:
+              path: /etc/apache2/ports.conf
+              regexp: '^Listen '
+              line: Listen 8080
+
+      - name: Add new hostname and IP address entry on a node in local DNS file
+        lineinfile: 
+              path: /etc/hosts
+              line: "172.31.46.100 worker3 imaginayNode"
+              state: present
+              insertafter: '127.0.0.1 localhost'
+
+      - name: Ensure the default Apache port back to 80
+        ansible.builtin.lineinfile:
+              path: /etc/apache2/ports.conf
+              regexp: '^Listen '
+              line: Listen 80
+

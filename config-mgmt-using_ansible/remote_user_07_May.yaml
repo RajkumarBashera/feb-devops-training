@@ -1,0 +1,15 @@
+---
+ - hosts:
+         - webserver
+         - dbserver
+   tasks:
+     - name: Task1
+       command: whoami
+       remote_user: rajkb
+       when: ansible_hostname == "worker1"
+
+     - name: Task2
+       command: whoami
+       remote_user: manu
+       when: ansible_hostname == "worker2"
+

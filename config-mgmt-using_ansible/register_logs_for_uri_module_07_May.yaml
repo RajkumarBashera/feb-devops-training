@@ -1,0 +1,26 @@
+---
+ - name: URL Connectivity check
+   hosts: dbserver
+   vars:
+           - testurl: https://capgemini-engineering.com/
+   tasks:
+      - name: Checking {{ testurl }} is there or not
+        uri:
+             url: "{{ testurl }}"
+        register: testresult
+        ignore_errors: yes
+
+      - name: Print Success
+        debug:
+             msg: "The Website Url {{ testurl }} is ACCESSIBLE"
+        when: testresult.status == 200
+
+      - name: Print Failure
+        debug:
+             msg: "The Website Url {{ testurl }} is NOT-ACCESSIBLE"
+        when: testresult.status == -1
+
+      - name: Printing result of first URI task
+        debug: 
+            msg: "{{testresult}}"
+

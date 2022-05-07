@@ -1,0 +1,21 @@
+---
+ - hosts: dbserver
+   tasks:
+      - apt:
+            name: tree
+            state: absent
+        become: yes
+        register: outputLogs                        ### output is just a variable name
+
+      - name: Printing registered output of previous task
+        debug:
+            msg: "{{outputLogs}}"
+
+      - name: Printing registered output of previous task for change only
+        debug:
+            msg: "{{outputLogs.changed}}"
+
+      - name: Printing registered output of first task failed or not
+        debug:
+            msg: "{{outputLogs.failed}}"
+

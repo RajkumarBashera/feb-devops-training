@@ -1,0 +1,10 @@
+---
+ - hosts: webserver
+   tasks:
+       - command: grep ansiuser /var/log/auth.log
+         register: var1
+         become: yes
+
+       - debug:
+             msg: "{{ var1.stdout }}"
+
