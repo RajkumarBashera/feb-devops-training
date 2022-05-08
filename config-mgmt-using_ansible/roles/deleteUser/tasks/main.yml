@@ -1,0 +1,10 @@
+---
+# tasks file for deleteUser
+ - name: User account openations for  {{ myuser }}
+   user:
+     name: "{{ myuser }}"
+     state: "{{ mystate }}"
+   notify: deleteHome
+ - name: Sample Task2
+   debug:
+      msg: "Sample Task 2"

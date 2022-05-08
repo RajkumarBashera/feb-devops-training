@@ -1,0 +1,12 @@
+---
+     - name: Apache Listen on port {{http_port}}
+       template:
+          src: httpPort.j2
+          dest: /etc/apache2/ports.conf
+       notify: "Restart Apache2 service"
+
+     - name: Apache port {{http_port}} update in configuration file
+       template:
+          src: httpConf.j2
+          dest: /etc/apache2/sites-enabled/000-default.conf
+       notify: "Restart Apache2 service"

@@ -1,0 +1,5 @@
+---
+# vars file for deleteUser
+myuser: naren
+mystate: absent
+myhome: /home/naren

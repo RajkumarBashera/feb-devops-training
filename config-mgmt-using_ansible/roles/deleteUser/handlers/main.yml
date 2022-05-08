@@ -1,0 +1,6 @@
+---
+# handlers file for deleteUser
+ - name: deleteHome
+   file:
+       name: "{{myhome}}"
+       state: absent

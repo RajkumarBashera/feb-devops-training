@@ -1,0 +1,14 @@
+---
+ - name: Install Apache Webserver
+   apt:
+          name: apache2
+          state: present
+          update_cache: yes
+   notify: "Restart Apache2 service"
+
+ - name: Copying Webpage
+   copy:
+          src: webpage.html
+          dest: "{{document_root}}/index.html"
+
+ - include_tasks: "conf.yaml"

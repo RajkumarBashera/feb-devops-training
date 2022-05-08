@@ -1,0 +1,7 @@
+---
+ - hosts:
+         - worker1
+         - worker2
+   become: yes
+   roles:
+         - deployApacheServer
